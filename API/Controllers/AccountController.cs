@@ -62,7 +62,7 @@ namespace API.Controllers
         {
             var user  = await _context.Users.SingleOrDefaultAsync(x =>x.UserName == loginDto.Username);
 
-            if(user is null)
+            if(user == null)
             {
                 return Unauthorized("Invalid username");
             }
