@@ -23,7 +23,7 @@ namespace API.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<AppUser>>> GetUsers()
         {
-            return  await  _contex.AppUsers.ToListAsync();
+            return  await  _contex.Users.ToListAsync();
          
         }
 
@@ -32,7 +32,7 @@ namespace API.Controllers
         [Authorize]
         public async Task<ActionResult<AppUser>> GetUsers(int id)
         {
-            return await _contex.AppUsers.FindAsync(id);
+            return await _contex.Users.FindAsync(id);
             
         }
     }
