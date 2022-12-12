@@ -63,7 +63,7 @@ namespace API
             //     app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "WebAPIv5 v1"));
 
             // }
-
+           // app.UseMiddleware<TrackingMiddleware>();
             app.UseMiddleware<ExceptionMiddleware>();
             app.UseSwagger();
             app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "WebAPIv5 v1"));

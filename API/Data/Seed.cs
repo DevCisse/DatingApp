@@ -41,30 +41,4 @@ namespace API.Data
     }
 
 
-
-    public class OverLoadedMethods
-    {
-        public int FunctionOverload(int no1, int no2)
-        {
-            return no1 + no2;
-        }
-        public double FunctionOverload(int no1, double no2, int no3)
-        {
-            return no1 + no2 + no3;
-        }
-
-        public void FunctionOverload(double no1, double no2)
-        {
-            double sum = no1 + no2;
-        }
-
-        //answer = within the same class of the OverLoadedMethods ...
-        public OverLoadedMethods()
-        {
-
-        }
-
-
-
-    }
 }
