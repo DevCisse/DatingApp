@@ -20,12 +20,12 @@ namespace API.Middleware
         private readonly IHostEnvironment _env;
         private readonly RequestDelegate _next;
         private readonly ILogger<ExceptionMiddleware> _logger;
-        public ExceptionMiddleware(RequestDelegate next,ILogger<ExceptionMiddleware> logger,IHostEnvironment env)
+        public ExceptionMiddleware(RequestDelegate next, ILogger<ExceptionMiddleware> logger, IHostEnvironment env)
         {
             _logger = logger;
             _next = next;
             _env = env;
-            
+
         }
 
 
@@ -33,25 +33,25 @@ namespace API.Middleware
         {
             try
             {
-                await _next(context);
+                 await _next(context);
             }
             catch (System.Exception ex)
             {
-                
-                _logger.LogError(ex,ex.Message);
+
+                _logger.LogError(ex, ex.Message);
 
                 context.Response.ContentType = MediaTypeNames.Application.Json;
-                context.Response.StatusCode = (int) HttpStatusCode.InternalServerError;
+                context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
 
-                var response = _env.IsDevelopment() ? new ApiException(context.Response.StatusCode,ex.Message,ex.StackTrace?.ToString()) : new ApiException(context.Response.StatusCode,"Internal Server Error");
+                var response = _env.IsDevelopment() ? new ApiException(context.Response.StatusCode, ex.Message, ex.StackTrace?.ToString()) : new ApiException(context.Response.StatusCode, "Internal Server Error");
 
 
-                var jsonOptions  =  new JsonSerializerOptions
+                var jsonOptions = new JsonSerializerOptions
                 {
-                    PropertyNamingPolicy =  JsonNamingPolicy.CamelCase
+                    PropertyNamingPolicy = JsonNamingPolicy.CamelCase
                 };
 
-                var json  = JsonSerializer.Serialize(response,jsonOptions);
+                var json = JsonSerializer.Serialize(response, jsonOptions);
 
                 await context.Response.WriteAsync(json);
             }
